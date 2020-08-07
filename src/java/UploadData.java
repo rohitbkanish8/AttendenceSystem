@@ -61,15 +61,19 @@ public class UploadData extends HttpServlet {
             
             //Getting File Path
             
-            String Path=request.getRealPath("/")+"file"+File.separator+part.getSubmittedFileName();
-            System.out.println("File Path : "+Path);
+            //String Path=request.getRealPath("/")+"file"+File.separator+part.getSubmittedFileName();
+            
+            String path = Constants.Constants.FILE_REPO + "/" + part.getName();
+                    
+            
+            System.out.println("File Path : "+path);
             
             //Saving File To the Project 
            
             InputStream io=part.getInputStream();
             byte b[] =new byte[io.available()];
             io.read(b);
-            FileOutputStream fos=new FileOutputStream(Path);
+            FileOutputStream fos=new FileOutputStream(path);
             fos.write(b);
             fos.flush();
             fos.close();
@@ -77,7 +81,7 @@ public class UploadData extends HttpServlet {
             //Fetching Data from the File
             
            //String fileName=part.getSubmittedFileName();
-            File file=new File(Path);
+            File file=new File(path);
             Scanner inputData=new Scanner(file);
             //String st=null;
             int i=0;
@@ -91,10 +95,10 @@ public class UploadData extends HttpServlet {
 //                out.println(str); 
 //                }
                 Class.forName("com.mysql.jdbc.Driver"); 
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                 Statement pst=con.createStatement();
-                int rs= pst.executeUpdate("insert into ut_timetable values('"+values[0]+"','"+values[1]+"','"+values[2]+"','"+values[3]+"','"+values[4]+"','"+values[5]+"','"+values[6]+"','"+values[7]+"','"+values[8]+"','"+values[9]+"','"+values[10]+"','"+values[11]+"')");
-                out.println(values[11]);
+                int rs= pst.executeUpdate("insert into ut_timetable values(null,'"+values[1]+"','"+values[2]+"','"+values[3]+"','"+values[4]+"','"+values[5]+"','"+values[6]+"','"+values[7]+"','"+values[8]+"','"+values[9]+"','"+values[10]+"','"+values[10]+"')");
+                out.println(values[10]);
             }
           //File Deleted
           out.println(file);
