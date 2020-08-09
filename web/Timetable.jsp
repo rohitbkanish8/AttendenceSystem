@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="cssfiles/bootstrap.min.css">
         <link rel="stylesheet" href="cssfiles/style.css">
         <link rel="stylesheet" href="cssfiles/stylemenu.css">
+        <link rel="stylesheet" href="cssfiles/datatables.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="jsfiles/slim.min.js"></script>
         <script src="jsfiles/menujs.js"></script>
@@ -32,6 +33,7 @@
         <script src="jsfiles/bootstrap.min.js"></script>
         <script src="jsfiles/selectyourclass.js" type="text/javascript" ></script>
         <script src="jsfiles/jquery-3.3.1.min.js"></script>
+        <script src="jsfiles/datatables.min.js"></script>
         
 <!--        <script>
                 $(document).ready(function(){
@@ -126,150 +128,70 @@
                         </div>
                     </div> 
                 </div>
+                <div class="container mt-2">
+                    <table class="table table-fluid text-center" id="myTable">
+                            <thead class="bg-dark text-white">
+                              <tr>
+                                <th>Teacher id</th>
+                                <th>Day</th>
+                                <th>Course</th>
+                                <th>Time</th>
+                                <th colspan="2">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody class="font-weight-bold bg-primary">
+                                <%
+                                try 
+                                {   Class.forName("com.mysql.jdbc.Driver"); 
+                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    PreparedStatement ps = con.prepareStatement("SELECT * FROM ut_timetable");
+                                    ResultSet rs = ps.executeQuery();
+
+
+                                while(rs.next()){
+                                %>
+                              <tr>
+                                <td><input class="font-weight-bold text-center" value="<%=rs.getString("t_id")%>" style="border: hidden;" readonly></td>
+                                <td><input class="font-weight-bold text-center" value="<%=rs.getString("day")%>" style="border: hidden;" readonly></td>
+                                <td><input class="font-weight-bold text-center" value="<%=rs.getString("course")%>" style="border: hidden;" readonly></td>
+                                <td><input class="font-weight-bold text-center" value="<%=rs.getString("start_at")%>" style="border: hidden;" readonly></td>
+                                <!--td><button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalView">
+                        <i class="fa fa-eye"></i> View </button></td-->
+                                <td><button type="button" class="btn btn-success getid" data-toggle="modal">
+                        <i class="fa fa-edit"></i> Edit </button></td>
+                                <td><button type="button" class="btn btn-danger delid" data-toggle="modal">
+                        <i class="fa fa-close"></i> Delete </button></td>
+                              </tr> 
+                                <%
+                               }
+                               con.close();
+
+                                 } catch (ClassNotFoundException e) {
+                                        e.printStackTrace();
+                                 } catch (SQLException e) {
+                                        e.printStackTrace();
+                               }
+
+                               %>
+                              <!--tr>
+                                <td>101</td>
+                                <td>Marry</td>
+                                <td>John</td>
+                                <td><a class="btn btn-light" href=""><i class="fa fa-eye"></i> View</a></td>
+                                <td><a class="btn btn-success" href=""><i class="fa fa-edit"></i> Edit</a></td>
+                                <td><a class="btn btn-danger" href=""><i class="fa fa-close"></i> Delete</a></td>
+                              </tr--> 
+                            </tbody>
+                          </table>
+                    </div>
         </div></div>
         </div>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Upload Timetable</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form ENCTYPE="multipart/form-data" ACTION="UploadData" METHOD="post">           <!--upload_page.jsp-->                
-                            
-                            <div class="row mt-2">
-                            <div class="col-lg-6">
-                            <label class="font-weight-bold">Choose the file To Upload:</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control float-left" name="file" type="file"/>
-                            </div>
-                            </div>
-                        <div class="modal-footer mt-3">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Upload</button>                                
-                            </div>
-                            </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalEditTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Edit Admin</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="Admin/Updateadmin.jsp">
-                            <div class="row mi-auto">
-                            <div class="col-lg-6 d-none">
-                            <label class="text-dark font-weight-bold">ID: </label>
-                            </div>
-                            <div class="col-lg-6 d-none">
-                                <input class="form-control float-left" id="edit_id" name="edit_id" type="text" placeholder="Admin"/>
-                            </div>
-                            <div class="col-lg-6">
-                            <label class="text-dark font-weight-bold">Enter Admin Name: </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control float-left" id="edit_name" name="edit_name" type="text" placeholder="Admin"/>
-                            </div>
-                            <div class="col-lg-6">
-                            <label class="text-dark font-weight-bold">Enter User_Name: </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control float-left" id="edit_usrname" name="edit_usrname" type="text" placeholder="admin"/>
-                            </div>
-                            <div class="col-lg-6">
-                            <label class="text-dark font-weight-bold">Enter Password: </label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input class="form-control float-left" id="edit_pass" name="edit_pass" type="text" placeholder="Password"/>
-                            </div>
-                            </div>                            
-                        <div class="modal-footer mt-3">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Update Admin</button>                                
-                            </div>
-                            </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalDeleteTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Delete Admin</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="Admin/Deleteadmin.jsp">
-                            <div class="row mi-auto text-center">
-                            <div class="col-lg-6 d-none">
-                            <label class="text-dark font-weight-bold">ID: </label>
-                            </div>
-                            <div class="col-lg-6 d-none">
-                                <input class="form-control float-left" id="deleteadmin" name="deleteadmin" type="text" value="" placeholder="ID" readonly/>
-                            </div>
-                            </div>
-                            <div class="row mi-auto text-center">
-                            <div class="col-lg-12">
-                                <h4>Are you sure you want to DELETE?</h4>
-                            </div>
-                            </div>
-                        <div class="modal-footer mt-3">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                <button type="submit" class="btn btn-danger">Yes</button>                                
-                            </div>
-                            </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <!--jsp:include page="/footer.jsp" /-->
-        <script>
-            var dropdown = document.getElementsByClassName("dropdown-btn");
-            var i;
 
-            for (i = 0; i < dropdown.length; i++) {
-              dropdown[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                  dropdownContent.style.display = "none";
-                } else {
-                  dropdownContent.style.display = "block";
-                }
-              });
-            }
-        </script>
         <script>
-            $(document).on("click", ".getid", function () {
-            var ID = $(this).data('id');
-            $(".modal-body #edit_id").val( ID );
-            var name = $(this).data('name');
-            $(".modal-body #edit_name").val( name );
-            var usr = $(this).data('usr');
-            $(".modal-body #edit_usrname").val( usr );
-            var pass = $(this).data('pass');
-            $(".modal-body #edit_pass").val( pass );
-       });
-            $(document).on("click", ".delid", function () {
-            var ID = $(this).data('id');
-            $(".modal-body #deleteadmin").val( ID );
-       }); 
+            $(document).ready( function () {
+                $('#myTable').DataTable();
+            } );
         </script>
-        
     </body>
 </html>
 

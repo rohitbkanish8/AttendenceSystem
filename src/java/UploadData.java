@@ -97,8 +97,20 @@ public class UploadData extends HttpServlet {
                 Class.forName("com.mysql.jdbc.Driver"); 
                 Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                 Statement pst=con.createStatement();
-                int rs= pst.executeUpdate("insert into ut_timetable values(null,'"+values[1]+"','"+values[2]+"','"+values[3]+"','"+values[4]+"','"+values[5]+"','"+values[6]+"','"+values[7]+"','"+values[8]+"','"+values[9]+"','"+values[10]+"','"+values[10]+"')");
-                out.println(values[10]);
+                int rs= pst.executeUpdate("insert into ut_timetable values('"+values[0]+"','"+values[1]+"','"+values[2]+"','"+values[3]+"','"+values[4]+"','"+values[5]+"','"+values[6]+"','"+values[7]+"','"+values[8]+"','"+values[9]+"','"+values[10]+"')");
+//                out.println(values[0]);
+//                out.println(values[1]);
+//                out.println(values[2]);
+//                out.println(values[3]);
+//                out.println(values[4]);
+//                out.println(values[5]);
+//                out.println(values[6]);
+//                out.println(values[7]);
+//                out.println(values[8]);
+//                out.println(values[9]);
+//                out.println(values[10]);
+//                out.println(values[11]);
+                con.close();
             }
           //File Deleted
           out.println(file);
@@ -164,3 +176,4 @@ public class UploadData extends HttpServlet {
     }// </editor-fold>
 
 }
+  

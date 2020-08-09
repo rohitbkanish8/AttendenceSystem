@@ -100,7 +100,7 @@
                     </div>                   
                     
                     <div class="container mt-2">
-                        <table class="table border table-hover table-responsive text-center">
+                        <table class="table border table-hover text-center">
                             <thead class="bg-dark text-white">
                               <tr>
                                 <th>ID</th>

@@ -12,6 +12,6 @@ package Constants;
 public interface Constants {
     public String FILE_REPO = "F:/Code";
     public String DB_USER_NAME = "root";
-    public String DB_PASSWORD = "solitera";
-    public String DB_HOST_URL = "jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull";
+    public String DB_PASSWORD = "";
+    public String DB_HOST_URL = "jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull";//jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull
 }
