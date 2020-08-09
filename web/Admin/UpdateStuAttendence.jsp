@@ -26,7 +26,7 @@
             String dates=request.getParameter("dates");
             String table=request.getParameter("table");
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
               Statement ps = con.createStatement();
             //String sql =" ALTER TABLE satya_attendence ADD COLUMN ("+dates+" varchar(10) default 'null')";
             int rs1 =0;

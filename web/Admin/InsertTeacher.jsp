@@ -28,7 +28,7 @@
             String t_usr=request.getParameter("t_usr");
             String t_pass=request.getParameter("t_pass");
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("INSERT INTO at_teacher (t_id,t_name,t_dept,t_design,t_username,t_password) VALUES ('"+t_id+"','"+t_name+"','"+t_dept+"','"+t_des+"','"+t_usr+"','"+t_pass+"')");
             int rs = st.executeUpdate();
                 if(rs>0){

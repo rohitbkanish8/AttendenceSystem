@@ -143,7 +143,7 @@
                                 <%
                                 try 
                                 {   Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("SELECT * FROM ut_timetable");
                                     ResultSet rs = ps.executeQuery();
 

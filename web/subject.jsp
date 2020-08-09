@@ -20,7 +20,7 @@
         {
             String course=request.getParameter("course");
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
            
             PreparedStatement ps = con.prepareStatement("Select distinct subject,subject_as from at_timetable where course='"+course+"' and t_id='"+session.getAttribute("teacherid")+"'");
            // ps.setString(1,department);

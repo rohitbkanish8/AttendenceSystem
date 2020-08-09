@@ -29,7 +29,7 @@
             String usr=request.getParameter("edit_usr");
             String pass=request.getParameter("edit_pass");
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("UPDATE at_teacher SET t_id='"+t_id+"',t_name='"+name+"',t_design='"+des+"',t_dept='"+dept+"',t_username='"+usr+"',t_password='"+pass+"' WHERE id='"+id+"'");
             int rs = st.executeUpdate();
                 if(rs>0){

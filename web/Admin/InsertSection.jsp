@@ -26,7 +26,7 @@
             int dept=Integer.parseInt(request.getParameter("dept"));
             int course=Integer.parseInt(request.getParameter("course"));
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("INSERT INTO at_section (section_name,sem_id,course_id,dept_id) VALUES('"+sec+"','"+sem+"','"+course+"','"+dept+"')");
             int rs = st.executeUpdate();
                 if(rs>0){

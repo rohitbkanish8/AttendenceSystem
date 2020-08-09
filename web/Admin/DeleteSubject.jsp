@@ -31,7 +31,7 @@
             String table=tname+"_"+dept+"_"+course+"_"+sem+"_"+sec+"_"+sname;
             out.println(sname);
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("DELETE from at_subject WHERE sub_id='"+id+"'");
             int rs = st.executeUpdate();
             PreparedStatement stm= con.prepareStatement("DROP TABLE "+table+"");

@@ -121,7 +121,7 @@
                                         day="Friday";
                                     }
                                     
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("select * from at_timetable where day='"+day+"' and t_id='"+name+"'");
                                     ResultSet rs = ps.executeQuery();
                                     int x=1;
@@ -191,7 +191,7 @@
 //                                  int subject=Integer.parseInt(request.getParameter("subject"));
 //                                  String table="";
                                   Class.forName("com.mysql.jdbc.Driver");             
-                                  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                  Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
 //                                  PreparedStatement stm = con.prepareStatement("SELECT c.course_name, s.semester_name, d.dept_name, sc.section_name, sb.sub_name FROM at_semester s,at_department d,at_course c,at_section sc,at_subject sb WHERE c.course_id='"+course+"' AND s.sem_id='"+sem+"' AND d.dept_id='"+dept+"' AND sc.sec_id='"+sec+"' AND sb.sub_id='"+subject+"' ");
 //                                  ResultSet rs1 = stm.executeQuery();
 //                                  while(rs1.next()){

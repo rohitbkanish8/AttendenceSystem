@@ -26,7 +26,7 @@
             int dept=Integer.parseInt(request.getParameter("editdept"));
             //int course=Integer.parseInt(request.getParameter("editcourse"));
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("UPDATE at_course SET course_name='"+course+"',dept_id='"+dept+"' WHERE course_id='"+id+"'");
             int rs = st.executeUpdate();
                 if(rs>0){

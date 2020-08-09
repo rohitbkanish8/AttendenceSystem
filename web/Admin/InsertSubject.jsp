@@ -28,7 +28,7 @@
             int course=Integer.parseInt(request.getParameter("course"));
             int teacher=Integer.parseInt(request.getParameter("teacher"));
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement st = con.prepareStatement("INSERT INTO at_subject (sub_name,t_id,dept_id,course_id,sem_id,sec_id) VALUES('"+subject+"','"+teacher+"','"+dept+"','"+course+"','"+sem+"','"+sec+"')");
             int rs = st.executeUpdate();
             PreparedStatement stm = con.prepareStatement("SELECT c.course_name, s.semester_name, d.dept_name, sc.section_name, t.t_name FROM at_semester s,at_department d,at_course c,at_teacher t,at_section sc WHERE c.course_id='"+course+"' AND s.sem_id='"+sem+"' AND t.id='"+teacher+"' AND d.dept_id='"+dept+"' AND sc.sec_id='"+sec+"' ");

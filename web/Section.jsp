@@ -21,7 +21,7 @@
              
             String sem=request.getParameter("sem");
             Class.forName("com.mysql.jdbc.Driver"); 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             PreparedStatement ps = con.prepareStatement("select * from at_section where sem_id = ?");
             ps.setString(1,sem);
             

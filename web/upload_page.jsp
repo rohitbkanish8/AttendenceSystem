@@ -57,7 +57,7 @@
             StringBuilder contents = new StringBuilder();
             BufferedReader input = new BufferedReader(new FileReader(saveFile));
             Class.forName("com.mysql.jdbc.Driver");  
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+            con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
             while (( line = input.readLine()) != null){
             contents.append(line);
             contents.append("#");

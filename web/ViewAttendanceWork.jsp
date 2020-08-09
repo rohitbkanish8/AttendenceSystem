@@ -75,7 +75,7 @@
                                     <option>Select Course...</option>
                                     <%
                                       Class.forName("com.mysql.jdbc.Driver");
-                                      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                      Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                       PreparedStatement st = con.prepareStatement("SELECT Distinct course FROM at_timetable where t_id='"+session.getAttribute("teacherid")+"'");
                                       ResultSet rs = st.executeQuery();
                                       while(rs.next()){

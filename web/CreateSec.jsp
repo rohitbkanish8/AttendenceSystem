@@ -115,7 +115,7 @@
                                 <%
                                 try 
                                 {   Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("SELECT sec.*, s.semester_name, d.dept_name, c.course_name FROM at_section sec JOIN at_department d ON sec.dept_id = d.dept_id JOIN at_course c ON sec.course_id = c.course_id JOIN at_semester s ON sec.sem_id = s.sem_id");
                                     ResultSet rs = ps.executeQuery();
 
@@ -180,7 +180,7 @@
                                    <%
                                 try 
                                 {   Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("select * from at_department");
                                     ResultSet rs = ps.executeQuery();
 
@@ -268,7 +268,7 @@
                                    <%
                                 try 
                                 {   Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("select * from at_department");
                                     ResultSet rs = ps.executeQuery();
 
@@ -300,7 +300,7 @@
                                     <%
                                     try {
                                     Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("select * from at_course");
                                     ResultSet rs = ps.executeQuery();
 
@@ -331,7 +331,7 @@
                                     <%
                                     try {
                                     Class.forName("com.mysql.jdbc.Driver"); 
-                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/attendence?zeroDateTimeBehavior=convertToNull", "root", "");
+                                    Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
                                     PreparedStatement ps = con.prepareStatement("select * from at_semester");
                                     ResultSet rs = ps.executeQuery();
 
