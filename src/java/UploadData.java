@@ -84,40 +84,50 @@ public class UploadData extends HttpServlet {
             File file=new File(path);
             Scanner inputData=new Scanner(file);
             //String st=null;
-            int i=0;
+            
+            Class.forName("com.mysql.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection(
+                    Constants.Constants.DB_HOST_URL, 
+                    Constants.Constants.DB_USER_NAME, 
+                    Constants.Constants.DB_PASSWORD);
+            
+            
+            Statement statement = con.createStatement();
+            Long startTime = System.currentTimeMillis();
             while(inputData.hasNext())
             {
                 String data=inputData.next();
                 String[] values= data.split(",");
-                out.println(data);
-//                for (String str : values)   
-//                {  
-//                out.println(str); 
-//                }
-                Class.forName("com.mysql.jdbc.Driver"); 
-                Connection con = DriverManager.getConnection(Constants.Constants.DB_HOST_URL, Constants.Constants.DB_USER_NAME, Constants.Constants.DB_PASSWORD);
-                Statement pst=con.createStatement();
-                int rs= pst.executeUpdate("insert into ut_timetable values('"+values[0]+"','"+values[1]+"','"+values[2]+"','"+values[3]+"','"+values[4]+"','"+values[5]+"','"+values[6]+"','"+values[7]+"','"+values[8]+"','"+values[9]+"','"+values[10]+"')");
-//                out.println(values[0]);
-//                out.println(values[1]);
-//                out.println(values[2]);
-//                out.println(values[3]);
-//                out.println(values[4]);
-//                out.println(values[5]);
-//                out.println(values[6]);
-//                out.println(values[7]);
-//                out.println(values[8]);
-//                out.println(values[9]);
-//                out.println(values[10]);
-//                out.println(values[11]);
-                con.close();
+                String query = "INSERT INTO ut_timetable VALUES (";
+                
+                for(int i = 0; i < 11; i++) {
+                    
+                    if(i == 0){
+                        query += "'" + values[i] + "'";
+                    }else{
+                        query += ",'" + values[i] + "'";
+                    }
+                         
+                }
+                
+                query += ",'')";
+                statement.addBatch(query);
+               
             }
-          //File Deleted
-          out.println(file);
+            statement.executeBatch();
+           
+            con.close();
+            
+            Long endTime = System.currentTimeMillis();
+            
+            out.println("TimeTaken : " + (endTime-startTime)/1000 + "s");
+            
+            //File Deleted
+             out.println(file);
             file.delete();
             //---------//
             inputData.close();
-            
+            response.sendRedirect("Timetable.jsp");
             out.println("<h1>Data Fetched</h1>");
             out.println("</body>");
             out.println("</html>");
